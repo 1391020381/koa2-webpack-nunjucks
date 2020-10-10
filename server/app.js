@@ -18,25 +18,10 @@ const koaWebpack = require('koa-webpack')
 const webpack = require('webpack')
 const webpackConfig = require('../build/webpack.dev.config')
 
-// async function startApp(){
-//    const compiler = webpack(config)
-//    try{
-//      const middleware = await koaWebpack({
-//        compiler
-//      })
-//      app.use(middleware)
-//      app.use(serve(resolve(__dirname,'./dist')))
-//      app.listen(3000,()=>{
-//          console.log('server is listening http://127.0.0.1:3000`')
-//      })
-//    }catch(e){
-//      console.log(e)
-//    }
-// }
 
 if(isDev){
     async  function addKoaWebapck(){
-      const compiler = webpack(config)
+      const compiler = webpack(webpackConfig)
        try{
           const koaWebpackMiddleware = await koaWebpack({
             compiler
@@ -48,6 +33,7 @@ if(isDev){
          console.log(e)
        }
     }
+
     addKoaWebapck()
 }else{
   // app.use(express.static(path.join(__dirname, `../${CONFIG.DIR.DIST}`)))

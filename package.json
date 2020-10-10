@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node bin/www",
-    "dev-old": "./node_modules/.bin/nodemon bin/www",
-    "dev": "cross-env NODE_ENV=development nodemon ./bin/www.js --watch server",
+    "dev": "cross-env NODE_ENV=development nodemon ./server/bin/www.js --watch server",
     "prd": "pm2 start bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,6 +28,7 @@
     "axios": "^0.20.0",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.2.0",
+    "cross-env": "^7.0.2",
     "file-loader": "^6.1.0",
     "glob": "^7.1.6",
     "html-loader": "^1.3.1",
