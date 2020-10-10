@@ -8,11 +8,49 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-
+const isDev = process.env.NODE_ENV === 'development'
 // error handler
 onerror(app)
 
 // middlewares
+
+const koaWebpack = require('koa-webpack')
+const webpack = require('webpack')
+const webpackConfig = require('./build/webpack.dev.config')
+
+// async function startApp(){
+//    const compiler = webpack(config)
+//    try{
+//      const middleware = await koaWebpack({
+//        compiler
+//      })
+//      app.use(middleware)
+//      app.use(serve(resolve(__dirname,'./dist')))
+//      app.listen(3000,()=>{
+//          console.log('server is listening http://127.0.0.1:3000`')
+//      })
+//    }catch(e){
+//      console.log(e)
+//    }
+// }
+
+if(isDev){
+    async  function addKoaWebapck(){
+      const compiler = webpack(config)
+       try{
+          const koaWebpackMiddleware = await koaWebpack({
+            compiler
+          })
+          app.use(koaWebpackMiddleware)
+       }catch(e){
+         console.log(e)
+       }
+    }
+}else{
+
+}
+
+
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
@@ -21,7 +59,7 @@ app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
-  extension: 'html'
+  extension: 'njk'
 }))
 
 // logger

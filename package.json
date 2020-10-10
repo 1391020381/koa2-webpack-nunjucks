@@ -20,6 +20,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
+    "koa-webpack": "^6.0.0",
     "nunjucks": "~3.0.0 ",
     "webpack-merge": "^5.2.0"
   },
@@ -35,7 +36,7 @@
     "image-webpack-loader": "^7.0.1",
     "nodemon": "^1.19.1",
     "nunjucks-html-loader": "^1.1.0",
-    "url-loader": "^4.1.0",
+    "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-middleware": "^3.7.2",
