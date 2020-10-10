@@ -16,7 +16,7 @@ onerror(app)
 
 const koaWebpack = require('koa-webpack')
 const webpack = require('webpack')
-const webpackConfig = require('./build/webpack.dev.config')
+const webpackConfig = require('../build/webpack.dev.config')
 
 // async function startApp(){
 //    const compiler = webpack(config)
