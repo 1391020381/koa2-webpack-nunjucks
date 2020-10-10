@@ -5,7 +5,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-
+const koaStatic = require('koa-static')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const isDev = process.env.NODE_ENV === 'development'
@@ -42,12 +42,19 @@ if(isDev){
             compiler
           })
           app.use(koaWebpackMiddleware)
+          // app.use(webpackConfig.output.publicPath, express.static(path.join(__dirname, '../src')))
+          app.use(koaStatic(webpack.output.publicPath,path.join(__dirname,'../src')))
        }catch(e){
          console.log(e)
        }
     }
+    addKoaWebapck()
 }else{
-
+  // app.use(express.static(path.join(__dirname, `../${CONFIG.DIR.DIST}`)))
+  app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))
+  app.use(views(__dirname + '/views', {
+    extension: 'njk'
+  }))
 }
 
 
@@ -56,11 +63,9 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+// app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(views(__dirname + '/views', {
-  extension: 'njk'
-}))
+
 
 // logger
 app.use(async (ctx, next) => {
