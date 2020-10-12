@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node bin/www",
+    "start": "node ./server/bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./server/bin/www.js --watch server",
-    "prd": "pm2 start bin/www",
+    "prd": "pm2 start ./server/bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

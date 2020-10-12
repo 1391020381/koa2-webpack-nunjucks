@@ -19,7 +19,7 @@ function getEntries(filepathList){
 }
 
 module.exports = {
-    entry:getEntries(path.resolve(__dirname,'../public/javascripts/src/**/index.js')),
+    entry:getEntries(path.resolve(__dirname,'../client/public/javascripts/src/**/index.js')),
     output:{
         path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
 		publicPath: CONFIG.PATH.PUBLIC_PATH,
