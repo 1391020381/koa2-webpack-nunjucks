@@ -6,7 +6,7 @@
     "clear": "rimraf dist",
     "deploy": "npm run build && npm run server",
     "server": "cross-env NODE_ENV=production node ./server/bin/www.js",
-    "dev": "cross-env NODE_ENV=development nodemon ./server/bin/www.js --watch server",
+    "dev": "cross-env NODE_ENV=development nodemon --watch server ./server/bin/www.js ",
     "prd": "pm2 start ./server/bin/www",
     "build": "npm run clear && cross-env NODE_ENV=production webpack --config ./build/webpack.prod.config.js"
   },
@@ -48,7 +48,7 @@
     "less": "^3.12.2",
     "less-loader": "^7.0.2",
     "mini-css-extract-plugin": "^1.0.0",
-    "nodemon": "^1.19.1",
+    "nodemon": "^1.19.4",
     "nunjucks-html-loader": "^1.1.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-cssnext": "^3.1.0",
