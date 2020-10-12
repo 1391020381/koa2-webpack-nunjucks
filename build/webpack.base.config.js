@@ -32,10 +32,10 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			'@': resolve(__dirname, '../client'),
-			js: resolve(__dirname, '../client/javascripts'),
-			css: resolve(__dirname, '../client/stylesheets/css'),
-			less: resolve(__dirname, '../client/stylesheets/less')
+			'@': path.resolve(__dirname, '../client'),
+			js: path.resolve(__dirname, '../client/public/javascripts'),
+			css: path.resolve(__dirname, '../client/public/stylesheets/css'),
+			less: path.resolve(__dirname, '../client/public/stylesheets/less')
 		}
 	},
     module:{

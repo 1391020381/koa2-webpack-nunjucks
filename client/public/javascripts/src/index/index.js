@@ -1,4 +1,4 @@
-import '@/index.less'
+import 'less/index.less'
 console.log('index')
 
 if(module.hot){
