@@ -1,7 +1,6 @@
 {
-	"plugins": ["transform-runtime", "transform-decorators-legacy"],
+	"plugins": [],
 	"presets": [
-		"env",
-		"stage-0"
+		"@babel/env"
 	]
 }

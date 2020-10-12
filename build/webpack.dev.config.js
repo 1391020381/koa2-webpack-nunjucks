@@ -3,9 +3,9 @@ const webpackMerge = require('webpack-merge')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const CONFIG = require('./config.json')
 
-const webapckBaseConfig = require('./webpack.base.config')
+const webpackBaseConfig = require('./webpack.base.config')
 
-module.exports = webpackMerge(webpackBaseConfig, {
+module.exports = webpackMerge.merge(webpackBaseConfig, {
 	module: {
 		rules: [
 			{
@@ -38,7 +38,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
 		}),
 		// OccurrenceOrderPlugin is needed for webpack 1.x only
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
+	//	new webpack.HotModuleReplacementPlugin(),
 		// Use NoErrorsPlugin for webpack 1.x
 		new webpack.NoEmitOnErrorsPlugin()
 	],

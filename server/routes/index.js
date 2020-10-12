@@ -4,6 +4,7 @@ router.get('/', async (ctx, next) => {
   // await ctx.render('index', {
   //   title: 'Hello Koa 2!'
   // })
+  console.log('首页')
      try{
       await render(res,'home',{title:'首页'})
      }catch(e){

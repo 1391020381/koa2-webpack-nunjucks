@@ -1,3 +1,4 @@
+const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
@@ -28,7 +29,7 @@ if(isDev){
           })
           app.use(koaWebpackMiddleware)
           // app.use(webpackConfig.output.publicPath, express.static(path.join(__dirname, '../src')))
-          app.use(koaStatic(webpack.output.publicPath,path.join(__dirname,'../src')))
+          app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,'../src')))
        }catch(e){
          console.log(e)
        }

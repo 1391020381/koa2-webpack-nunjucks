@@ -8,20 +8,24 @@ const  CONFIG = require('./config.json')
 const isDev = process.env.NODE_ENV ==='development'
 
 function getEntries(filepathList){
+	// console.log('filepathList:',JSON.stringify(filepathList))
      let entry = {}
      filepathList.forEach(filepath => {
-        const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-        const key = list[list.length - 1].replace(/\.js/g, '')
+		const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
+		// console.log('list:',list)
+		// const key = list[list.length - 1].replace(/\.js/g, '')
+		const key = list[7]
         // 如果是开发环境，才需要引入 hot module
         entry[key] = isDev ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
-    })
+	})
+	console.log('entry:',JSON.stringify(entry))
     return entry
 }
 
 module.exports = {
-    entry:getEntries(path.resolve(__dirname,'../client/public/javascripts/src/**/index.js')),
+    entry:getEntries(glob.sync(path.resolve(__dirname,'../client/public/javascripts/src/**/index.js'))),
     output:{
-        path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
+        path: path.resolve(__dirname, `../${CONFIG.DIR.DIST}`),
 		publicPath: CONFIG.PATH.PUBLIC_PATH,
 		filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
 		chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].[chunkhash].js`
@@ -111,7 +115,7 @@ module.exports = {
 			$: 'jquery'
 		}),
 		// 打包文件
-		...glob.sync(resolve(__dirname, '../src/views/**/*.html')).map((filepath, i) => {
+		...glob.sync(path.resolve(__dirname, '../client/views/**/*.html')).map((filepath, i) => {
 			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
 			// 读取 CONFIG.EXT 文件自定义的文件后缀名，默认生成 ejs 文件，可以定义生成 html 文件
 			const filename = (name => `${name.split('.')[0]}.${CONFIG.EXT}`)(`${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`)
