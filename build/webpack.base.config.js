@@ -29,7 +29,15 @@ module.exports = {
 		publicPath: CONFIG.PATH.PUBLIC_PATH,
 		filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
 		chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].[chunkhash].js`
-    },
+	},
+	resolve: {
+		alias: {
+			'@': resolve(__dirname, '../client'),
+			js: resolve(__dirname, '../client/javascripts'),
+			css: resolve(__dirname, '../client/stylesheets/css'),
+			less: resolve(__dirname, '../client/stylesheets/less')
+		}
+	},
     module:{
         rules:[
             {
@@ -73,34 +81,34 @@ module.exports = {
 					}
 				]
             },
-            {
-				test: /\.html$/,
-				use: [
-					{
-						loader: 'html-loader',
-						options: {
-							attrs: ['img:src', 'img:data-src', ':data-background']
-						}
-					}
-				]
-            },
-            {
-				test: /\.njk$/,
-				use: [
-					{
-						loader: 'html-loader',
-						options: {
-							attrs: ['img:src', 'img:data-src', ':data-background']
-						}
-					},
-					{
-						loader: 'nunjucks-html-loader',
-						options: {
-							production: process.env.ENV === 'production'
-						}
-					}
-				]
-			}
+            // {
+			// 	test: /\.html$/,
+			// 	use: [
+			// 		{
+			// 			loader: 'html-loader',
+			// 			options: {
+			// 				attrs: ['img:src', 'img:data-src', ':data-background']
+			// 			}
+			// 		}
+			// 	]
+            // },
+            // {
+			// 	test: /\.njk$/,
+			// 	use: [
+			// 		{
+			// 			loader: 'html-loader',
+			// 			options: {
+			// 				attrs: ['img:src', 'img:data-src', ':data-background']
+			// 			}
+			// 		},
+			// 		{
+			// 			loader: 'nunjucks-html-loader',
+			// 			options: {
+			// 				production: process.env.ENV === 'production'
+			// 			}
+			// 		}
+			// 	]
+			// }
         ]
     },
     plugins: [
@@ -115,7 +123,7 @@ module.exports = {
 			$: 'jquery'
 		}),
 		// 打包文件
-		...glob.sync(path.resolve(__dirname, '../client/views/**/*.html')).map((filepath, i) => {
+		...glob.sync(path.resolve(__dirname, '../client/views/**/*.njk')).map((filepath, i) => {
 			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
 			// 读取 CONFIG.EXT 文件自定义的文件后缀名，默认生成 ejs 文件，可以定义生成 html 文件
 			const filename = (name => `${name.split('.')[0]}.${CONFIG.EXT}`)(`${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`)

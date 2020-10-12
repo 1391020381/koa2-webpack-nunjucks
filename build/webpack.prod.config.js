@@ -6,7 +6,7 @@ const CONFIG = require('./config')
 
 const webpackBaseConfig = require('./webpack.base.config')
 
-module.exports = webpackMerge(webpackBaseConfig, {
+module.exports = webpackMerge.merge(webpackBaseConfig, {
 	module: {
 		rules: [
 			{
