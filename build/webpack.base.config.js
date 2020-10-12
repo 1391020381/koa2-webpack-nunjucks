@@ -11,10 +11,10 @@ function getEntries(filepathList){
 	// console.log('filepathList:',JSON.stringify(filepathList))
      let entry = {}
      filepathList.forEach(filepath => {
-		const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
+		const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line  // 斜杠分割文件目录
 		// console.log('list:',list)
 		// const key = list[list.length - 1].replace(/\.js/g, '')
-		const key = list[7]
+		const key = list[7]                             // 拿到文件的 filename
         // 如果是开发环境，才需要引入 hot module
         entry[key] = isDev ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
 	})

@@ -29,7 +29,7 @@ if(isDev){
           })
           app.use(koaWebpackMiddleware)
           // app.use(webpackConfig.output.publicPath, express.static(path.join(__dirname, '../src')))
-          app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,'../src')))
+          app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,'../client/public')))
        }catch(e){
          console.log(e)
        }
@@ -37,11 +37,12 @@ if(isDev){
 
     addKoaWebapck()
 }else{
-  // app.use(express.static(path.join(__dirname, `../${CONFIG.DIR.DIST}`)))
-  app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))
-  app.use(views(__dirname + '/views', {
+ 
+  app.use(views(__dirname + `../${CONFIG.DIR.DIST}`, {
     extension: 'njk'
   }))
+   // app.use(express.static(path.join(__dirname, `../${CONFIG.DIR.DIST}`)))
+   app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))
 }
 
 
