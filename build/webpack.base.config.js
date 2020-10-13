@@ -48,37 +48,7 @@ module.exports = {
             {
 				test: /\.(png|jpg|jpeg|gif)$/,
 				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							name: '[name].[hash:5].[ext]',
-							limit: 1000,
-							outputPath: CONFIG.DIR.IMAGE
-						}
-					},
-					{
-						loader: 'image-webpack-loader',
-						options: {
-							disable: process.env.NODE_ENV !== 'production',
-							pngquant: {
-								quality: '80'
-							}
-						}
-					}
-				]
-            },
-            {
-				test: /\.(eot|woff2|woff|ttf|svg)$/,
-				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							outputPath: CONFIG.DIR.FONT
-						}
-					},
-					{
-						loader: 'url-loader'
-					}
+					'url-loader'
 				]
             },
             // {
