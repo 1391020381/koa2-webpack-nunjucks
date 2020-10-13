@@ -9,27 +9,35 @@ const logger = require('koa-logger')
 const koaStatic = require('koa-static')
 const index = require('./routes/index')
 const users = require('./routes/users')
+
+const catchError = require('./middlewares/exception')
+
+const koaWebpack = require('koa-webpack')
+const webpack = require('webpack')
+const webpackConfig = require('../build/webpack.dev.config')
 const isDev = process.env.NODE_ENV === 'development'
+
+
+
+
 // error handler
 onerror(app)
 
 // middlewares
 
-const koaWebpack = require('koa-webpack')
-const webpack = require('webpack')
-const webpackConfig = require('../build/webpack.dev.config')
 
+app.use(catchError)
 
 if(isDev){
     async  function addKoaWebapck(){
       const compiler = webpack(webpackConfig)
        try{
-          const koaWebpackMiddleware = await koaWebpack({
+         const  koaWebpackMiddleware = await koaWebpack({
             compiler
           })
           app.use(koaWebpackMiddleware)
           // app.use(webpackConfig.output.publicPath, express.static(path.join(__dirname, '../src')))
-          app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,'../client/public')))
+          // app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,'../client/public')))
        }catch(e){
          console.log(e)
        }

@@ -62,23 +62,36 @@ module.exports = {
 			// 		}
 			// 	]
             // },
-            // {
-			// 	test: /\.njk$/,
-			// 	use: [
-			// 		{
-			// 			loader: 'html-loader',
-			// 			options: {
-			// 				attrs: ['img:src', 'img:data-src', ':data-background']
-			// 			}
-			// 		},
-			// 		{
-			// 			loader: 'nunjucks-html-loader',
-			// 			options: {
-			// 				production: process.env.ENV === 'production'
-			// 			}
-			// 		}
-			// 	]
-			// }
+            {
+				test: /\.njk$/,
+				use: [
+					{
+						loader: 'html-loader',
+						options: {
+							attributes:{
+								list:[
+									{
+										tag: 'img',
+										attribute: 'data-src',
+										type: 'src',
+									  },
+									  {
+										tag: 'img',
+										attribute: 'data-srcset',
+										type: 'srcset',
+									  }
+								]
+							}
+						}
+					},
+					{
+						loader: 'simple-nunjucks-loader',
+						options: {
+						  //	production: process.env.ENV === 'production'
+						}
+					}
+				]
+			}
         ]
     },
     plugins: [

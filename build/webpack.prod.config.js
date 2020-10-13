@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const OptimizeCss = require('optimize-css-assets-webpack-plugin')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CONFIG = require('./config')
 
@@ -11,38 +11,6 @@ const { loader } = require('mini-css-extract-plugin')
 module.exports = webpackMerge.merge(webpackBaseConfig, {
 	module: {
 		rules: [
-			// {
-			// 	test: /\.less$/,
-			// 	use: ExtractTextWebpackPlugin.extract({
-			// 		fallback: {
-			// 			loader: 'style-loader',
-			// 			options: {
-							
-			// 			}
-			// 		},
-			// 		use: [
-			// 			{
-			// 				loader: 'css-loader',
-			// 				options: {
-			// 					importLoaders: 2
-			// 				}
-			// 			},
-			// 			{
-			// 				loader: 'postcss-loader',
-			// 				options: {
-			// 					postcssOptions:{
-			// 						ident: 'postcss',
-			// 						plugins: [
-			// 							require('postcss-cssnext')()
-			// 						]
-			// 					}
-								
-			// 				}
-			// 			},
-			// 			'less-loader'
-			// 		]
-			// 	})
-			// }
 			{
 				test: /\.css$/,
 				use: [
