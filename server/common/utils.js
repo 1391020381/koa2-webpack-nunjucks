@@ -21,7 +21,7 @@ function getTemplateString (filename) {
 async function render (ctx, filename, data) {
 	// 文件后缀
 	
-	const ext = '.njk'
+	const ext = '.html'
 	filename = filename.indexOf(ext) > -1 ? filename.split(ext)[0] : filename
 	console.log('filename:',filename,isDev)
 	try {

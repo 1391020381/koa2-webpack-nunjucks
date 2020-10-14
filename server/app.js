@@ -37,7 +37,7 @@ if(isDev){
           })
           app.use(koaWebpackMiddleware)
           // app.use(webpackConfig.output.publicPath, express.static(path.join(__dirname, '../src')))
-          // app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,'../client/public')))
+          app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,`../client`)))
        }catch(e){
          console.log(e)
        }
@@ -47,7 +47,7 @@ if(isDev){
 }else{
  
   app.use(views(__dirname + `../${CONFIG.DIR.DIST}`, {
-    extension: 'njk'
+    extension: 'html'
   }))
    // app.use(express.static(path.join(__dirname, `../${CONFIG.DIR.DIST}`)))
    app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))

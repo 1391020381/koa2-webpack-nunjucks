@@ -51,17 +51,30 @@ module.exports = {
 					'url-loader'
 				]
             },
-            // {
-			// 	test: /\.html$/,
-			// 	use: [
-			// 		{
-			// 			loader: 'html-loader',
-			// 			options: {
-			// 				attrs: ['img:src', 'img:data-src', ':data-background']
-			// 			}
-			// 		}
-			// 	]
-            // },
+            {
+				test: /\.html$/,
+				use: [
+					{
+						loader: 'html-loader',
+						options: {
+							attributes:{
+								list:[
+									{
+										tag: 'img',
+										attribute: 'data-src',
+										type: 'src',
+									  },
+									  {
+										tag: 'img',
+										attribute: 'data-srcset',
+										type: 'srcset',
+									  }
+								]
+							}
+						}
+					}
+				]
+            },
             {
 				test: /\.njk$/,
 				use: [
@@ -85,9 +98,10 @@ module.exports = {
 						}
 					},
 					{
-						loader: 'simple-nunjucks-loader',
+						loader: 'nunjucks-html-loader',
 						options: {
-						  //	production: process.env.ENV === 'production'
+							searchPaths: path.resolve(__dirname, '../client/views'),
+						  	production: process.env.ENV === 'production'
 						}
 					}
 				]
