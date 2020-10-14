@@ -16,7 +16,12 @@ function getEntries(filepathList){
 		// const key = list[list.length - 1].replace(/\.js/g, '')
 		const key = list[7]                             // 拿到文件的 filename
         // 如果是开发环境，才需要引入 hot module
-        entry[key] = isDev ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
+		// entry[key] = isDev ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
+		entry[key] = isDev ? [
+			// For old browsers
+			'eventsource-polyfill',
+			'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+			filepath] : filepath
 	})
 	console.log('entry:',JSON.stringify(entry))
     return entry

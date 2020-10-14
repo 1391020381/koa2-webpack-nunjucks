@@ -12,7 +12,7 @@ const users = require('./routes/users')
 
 const catchError = require('./middlewares/exception')
 
-const koaWebpack = require('koa-webpack')
+const {devMiddleware,hotMiddleware} = require('koa-webpack-middleware')
 const webpack = require('webpack')
 const webpackConfig = require('../build/webpack.dev.config')
 const isDev = process.env.NODE_ENV === 'development'
@@ -29,21 +29,17 @@ onerror(app)
 app.use(catchError)
 
 if(isDev){
-    async  function addKoaWebapck(){
-      const compiler = webpack(webpackConfig)
-       try{
-         const  koaWebpackMiddleware = await koaWebpack({
-            compiler
-          })
-          app.use(koaWebpackMiddleware)
-          // app.use(webpackConfig.output.publicPath, express.static(path.join(__dirname, '../src')))
-          app.use(koaStatic(webpackConfig.output.publicPath,path.join(__dirname,`../client`)))
-       }catch(e){
-         console.log(e)
-       }
-    }
+    const compiler = webpack(webpackConfig)
+    app.use(devMiddleware(compiler,{
+      publicPath: webpackConfig.output.publicPath
+    }))
+    app.use(hotMiddleware(compiler),{
+      publicPath: webpackConfig.output.publicPath,
+		  noInfo: true
+    })
 
-    addKoaWebapck()
+    // 指定开发环境下的静态资源目录
+	app.use(webpackConfig.output.publicPath, koaStatic(path.join(__dirname, '../client')))
 }else{
  
   app.use(views(__dirname + `../${CONFIG.DIR.DIST}`, {
