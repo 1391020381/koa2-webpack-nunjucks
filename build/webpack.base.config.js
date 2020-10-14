@@ -56,32 +56,32 @@ module.exports = {
 					'url-loader'
 				]
             },
+            // {
+			// 	test: /\.html$/,
+			// 	use: [
+			// 		{
+			// 			loader: 'html-loader',
+			// 			options: {
+			// 				attributes:{
+			// 					list:[
+			// 						{
+			// 							tag: 'img',
+			// 							attribute: 'data-src',
+			// 							type: 'src',
+			// 						  },
+			// 						  {
+			// 							tag: 'img',
+			// 							attribute: 'data-srcset',
+			// 							type: 'srcset',
+			// 						  }
+			// 					]
+			// 				}
+			// 			}
+			// 		}
+			// 	]
+            // },
             {
 				test: /\.html$/,
-				use: [
-					{
-						loader: 'html-loader',
-						options: {
-							attributes:{
-								list:[
-									{
-										tag: 'img',
-										attribute: 'data-src',
-										type: 'src',
-									  },
-									  {
-										tag: 'img',
-										attribute: 'data-srcset',
-										type: 'srcset',
-									  }
-								]
-							}
-						}
-					}
-				]
-            },
-            {
-				test: /\.njk$/,
 				use: [
 					{
 						loader: 'html-loader',
@@ -125,7 +125,7 @@ module.exports = {
 			$: 'jquery'
 		}),
 		// 打包文件
-		...glob.sync(path.resolve(__dirname, '../client/views/**/*.njk')).map((filepath, i) => {
+		...glob.sync(path.resolve(__dirname, '../client/views/**/*.html')).map((filepath, i) => {
 			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
 			// 读取 CONFIG.EXT 文件自定义的文件后缀名，默认生成 ejs 文件，可以定义生成 html 文件
 			const filename = (name => `${name.split('.')[0]}.${CONFIG.EXT}`)(`${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`)

@@ -6,7 +6,8 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const koaStatic = require('koa-static')
+
+const koaStaticServer = require('koa-static-server')
 const index = require('./routes/index')
 const users = require('./routes/users')
 
@@ -16,7 +17,7 @@ const {devMiddleware,hotMiddleware} = require('koa-webpack-middleware')
 const webpack = require('webpack')
 const webpackConfig = require('../build/webpack.dev.config')
 const isDev = process.env.NODE_ENV === 'development'
-
+const CONFIG = require('../build/config.json')
 
 
 
@@ -26,27 +27,29 @@ onerror(app)
 // middlewares
 
 
-app.use(catchError)
+ app.use(catchError)
 
 if(isDev){
     const compiler = webpack(webpackConfig)
     app.use(devMiddleware(compiler,{
       publicPath: webpackConfig.output.publicPath
     }))
-    app.use(hotMiddleware(compiler),{
+    app.use(hotMiddleware(compiler,{
       publicPath: webpackConfig.output.publicPath,
 		  noInfo: true
-    })
+    }))
 
     // 指定开发环境下的静态资源目录
-	app.use(webpackConfig.output.publicPath, koaStatic(path.join(__dirname, '../client')))
+  console.log('staticPath:',path.join(__dirname,`../client`))
+  app.use(koaStaticServer({rootPath:webpackConfig.output.publicPath,rootDir:path.join(__dirname,`../client`)}))
 }else{
  
   app.use(views(__dirname + `../${CONFIG.DIR.DIST}`, {
     extension: 'html'
   }))
-   // app.use(express.static(path.join(__dirname, `../${CONFIG.DIR.DIST}`)))
-   app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))
+   
+  //  app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))
+  app.use(koaStaticServer({rootPath:'',rooDir:path.join(__dirname,`../${CONFIG.DIR.DIST}`)}))
 }
 
 
