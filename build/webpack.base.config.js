@@ -78,23 +78,9 @@ module.exports = {
 							}
 						}
 					},
-					// {
-					// 	loader: 'nunjucks-html-loader',
-					// 	options: {
-					// 		searchPaths: path.resolve(__dirname, '../client/views'),
-					// 	  	production: process.env.ENV === 'production'
-					// 	}
-					// }
 					{
-                        loader: 'exports-loader',
-                        options: {
-                            'render': 'exports'
-                        }
-                    },
-					{
-						loader: 'simple-nunjucks-loader',
+						loader: 'nunjucks-html-loader',
 						options: {
-							jinjaCompat:true,
 							searchPaths: path.resolve(__dirname, '../client/views')
 						}
 					}

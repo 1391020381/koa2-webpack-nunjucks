@@ -6,7 +6,7 @@ router.get('/', async (ctx, next) => {
   // })
   console.log('首页')
      try{
-       await render(ctx,'index',{title:'行云流水justdoit'})
+       await render(ctx,'index',{title:'行云流水justdoit!!!!!!!!!!!!!!!',list:[1,2,3,4]})
      }catch(e){
         console.log(e)
       // next(e)

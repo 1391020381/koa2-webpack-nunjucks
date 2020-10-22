@@ -3,6 +3,7 @@ const nunjucks = require('nunjucks')
 const CONFIG = require('../../build/config.json')
 const isDev = process.env.NODE_ENV  === 'development'
 const path = require('path')
+const { env } = require('process')
 
 
 function getTemplateString (filename) {
@@ -23,7 +24,14 @@ async function render (ctx, filename, data) {
 	try {
 		if (isDev) {
 			const template = await getTemplateString(`${filename}.html`)
+			console.log('template:',template)
 			if(template){
+				nunjucks.configure(template,{
+					tags:{
+						variableStart: '<%',
+                        variableEnd: '%>',
+					}
+				})
 				let html = nunjucks.renderString(template,data)
 				ctx.set('Content-Type', 'text/html; charset=utf-8')
 				ctx.body = html
