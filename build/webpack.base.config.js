@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const glob = require('glob')
 const path = require('path')
 const  CONFIG = require('./config.json')
@@ -122,6 +123,7 @@ module.exports = {
 		new HtmlWebpackHarddiskPlugin({
 			outputPath: path.resolve(__dirname, '../dev-views')
 		}),
+		new BundleAnalyzerPlugin()
 		
 	]
 }
