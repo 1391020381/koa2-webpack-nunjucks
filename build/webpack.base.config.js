@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const glob = require('glob')
 const path = require('path')
 const  CONFIG = require('./config.json')
@@ -53,7 +54,15 @@ module.exports = {
             {
 				test: /\.(png|jpg|jpeg|gif)$/,
 				use: [
-					'url-loader'
+					{
+						loader: 'url-loader',
+						options: {
+							name: '[name].[hash:5].[ext]',
+							limit: 1000,
+							// outputPath: CONFIG.DIR.IMAGE,
+							// esModule:false
+						}
+					}
 				]
             },
             {
@@ -77,12 +86,6 @@ module.exports = {
 								]
 							}
 						}
-					},
-					{
-						loader: 'nunjucks-html-loader',
-						options: {
-							searchPaths: path.resolve(__dirname, '../client/views')
-						}
 					}
 				]
 			}
@@ -96,6 +99,13 @@ module.exports = {
 		// 		writeToDisk: !isDev
 		// 	}
 		// ]),
+		new CopyWebpackPlugin({
+			patterns:[
+				{
+					from: path.resolve(__dirname, "../client/public/images/"),
+					to: path.resolve(__dirname, `../${CONFIG.DIR.DIST}/images`)}
+			]
+		}),
 		new webpack.ProvidePlugin({
 			$: 'jquery'
 		}),
@@ -107,7 +117,11 @@ module.exports = {
 			const template = filepath
 			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
 			const chunks = isDev ? [ fileChunk ] : ['manifest', 'vendors', fileChunk]
-			return new HtmlWebpackPlugin({ filename, template, chunks })
-		})
+			return new HtmlWebpackPlugin({ filename, template, chunks ,alwaysWriteToDisk:true})
+		}),
+		new HtmlWebpackHarddiskPlugin({
+			outputPath: path.resolve(__dirname, '../dev-views')
+		}),
+		
 	]
 }

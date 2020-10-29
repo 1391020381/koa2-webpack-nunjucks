@@ -12,3 +12,4 @@ yarn.lock
 logs/
 .history/
 dist/
+dev-views/

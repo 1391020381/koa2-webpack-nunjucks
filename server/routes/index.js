@@ -1,12 +1,10 @@
 const router = require('koa-router')()
 const {render} = require('../common/utils')
+const nunjucks = require('nunjucks')
 router.get('/', async (ctx, next) => {
-  // await ctx.render('index', {
-  //   title: 'Hello Koa 2!'
-  // })
-  console.log('首页')
      try{
-       await render(ctx,'index',{title:'行云流水justdoit!!!!!!!!!!!!!!!',list:[1,2,3,4]})
+      
+      await ctx.render('index',{title:'行云流水justdoit',items:[1,2,3,4]})
      }catch(e){
         console.log(e)
       // next(e)

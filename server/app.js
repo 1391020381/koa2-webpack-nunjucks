@@ -2,6 +2,7 @@ const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
+const koaNunjucks = require('koa-nunjucks-2')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
@@ -40,7 +41,16 @@ if(isDev){
     }))
 
     // 指定开发环境下的静态资源目录
-  console.log('staticPath:',path.join(__dirname,`../client`))
+  console.log('staticPath:',path.join(__dirname,`../client`),path.join(__dirname,`../${CONFIG.DIR.devViews}`))
+
+  app.use(koaNunjucks({
+    ext: 'html',
+    path: path.join(__dirname,`../${CONFIG.DIR.devViews}`),
+    nunjucksConfig: {
+      autoescape:false,
+      noCache:true
+    }
+  }))
   app.use(koaStaticServer({rootPath:webpackConfig.output.publicPath,rootDir:path.join(__dirname,`../client`)}))
 }else{
  
@@ -48,7 +58,7 @@ if(isDev){
     extension: 'html'
   }))
    
-  //  app.use(koaStatic(path.join(__dirname,`../${CONFIG.DIR.DIST}`)))
+  
   app.use(koaStaticServer({rootPath:'',rooDir:path.join(__dirname,`../${CONFIG.DIR.DIST}`)}))
 }
 

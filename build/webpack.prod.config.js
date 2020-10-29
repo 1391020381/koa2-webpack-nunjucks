@@ -33,11 +33,6 @@ module.exports = webpackMerge.merge(webpackBaseConfig, {
 			filename:`${CONFIG.DIR.STYLE}/[name].[contenthash].css`,
 			chunkFilename: `${CONFIG.DIR.STYLE}/[id].[contenthash].css`
 		})
-		// new ExtractTextWebpackPlugin({
-		// 	filename: `${CONFIG.DIR.STYLE}/[name].[hash:5].min.css`
-		// }),
-
-		// new OptimizeCss()
 	],
 
 	optimization: {

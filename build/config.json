@@ -9,7 +9,8 @@
 		"STYLE": "css",
 		"SCRIPT": "js",
 		"FONT": "fonts",
-		"IMAGE": "imgs"
+		"IMAGE": "images",
+		"devViews":"dev-views/views"
 	},
 	"EXT": "html"
 }

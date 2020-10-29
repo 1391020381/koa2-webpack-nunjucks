@@ -1,3 +1,6 @@
 html {
   background: #ffffff;
+  color: red;
+  background: url('../../images/test.jpg') no-repeat center;
+  background-size: 100%;
 }

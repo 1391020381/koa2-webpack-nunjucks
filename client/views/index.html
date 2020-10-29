@@ -1,12 +1,16 @@
-{% extends './layout.html' %}
-{% block content %}
-    <h1> {{ title }} </h1>
-    <p> Welcome to {{ title }} </p>
-
-     
-     <h1 style="margin-top:50px;"> <% title %> </h1>
-    <p> Welcome to <% title %> </p>
-     {# <% for item in list %>
-         <span><% item %></span>
-     <% endfor %> #}
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}</title>
+    </head>
+    <body>
+    <h1 style="margin-top:50px;"> {{ title }} </h1>
+    <ul>
+            {% for name, item in items %}
+              <li>{{ name }}: {{ item }}</li>
+            {% endfor %}
+   </ul>
+   <img src="../public/images/test.jpg"/>
+    </body>
+</html>
