@@ -1,6 +1,6 @@
 import axios from 'axios'
 import 'less/index.less'
-console.log('index')
+console.log('index!!!!!!!!!!!!!!')
 const isDev = process.env.NODE_ENV === 'development'
 
 if(isDev){

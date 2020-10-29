@@ -1,12 +1,11 @@
 const router = require('koa-router')()
-const nunjucks = require('nunjucks')
 router.get('/', async (ctx, next) => {
      try{
       
-      await ctx.render('index',{title:'行云流水justdoit',items:[{ title: "foo", id: 1 }, { title: "bar", id: 2}]})
+      await ctx.render('index',{title:'行云流水111111111',items:[{ title: "foo", id: 1 }, { title: "bar", id: 2}]})
      }catch(e){
         console.log(e)
-      // next(e)
+      next(e)
      }
 })
 
