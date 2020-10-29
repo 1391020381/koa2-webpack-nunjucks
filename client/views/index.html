@@ -6,11 +6,12 @@
     </head>
     <body>
     <h1 style="margin-top:50px;"> {{ title }} </h1>
-    <ul>
-            {% for name, item in items %}
-              <li>{{ name }}: {{ item }}</li>
-            {% endfor %}
-   </ul>
+   <ul>
+{% for item in items %}
+  <li>{{ item.title }}</li>
+{% else %}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
    <img src="../public/images/test.jpg"/>
 
    <p>44444444<p>

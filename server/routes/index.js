@@ -3,7 +3,7 @@ const nunjucks = require('nunjucks')
 router.get('/', async (ctx, next) => {
      try{
       
-      await ctx.render('index',{title:'行云流水justdoit',items:[1,2,3,4]})
+      await ctx.render('index',{title:'行云流水justdoit',items:[{ title: "foo", id: 1 }, { title: "bar", id: 2}]})
      }catch(e){
         console.log(e)
       // next(e)
