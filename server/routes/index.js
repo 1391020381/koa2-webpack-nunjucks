@@ -1,5 +1,4 @@
 const router = require('koa-router')()
-const {render} = require('../common/utils')
 const nunjucks = require('nunjucks')
 router.get('/', async (ctx, next) => {
      try{

@@ -53,10 +53,16 @@ if(isDev){
   }))
   app.use(koaStaticServer({rootPath:webpackConfig.output.publicPath,rootDir:path.join(__dirname,`../client`)}))
 }else{
- 
-  app.use(views(__dirname + `../${CONFIG.DIR.DIST}`, {
-    extension: 'html'
+  
+  app.use(koaNunjucks({
+    ext: 'html',
+    path: path.join(__dirname,`../${CONFIG.DIR.DIST}/${CONFIG.DIR.VIEW}`),
+    nunjucksConfig: {
+      autoescape:false,
+      noCache:true
+    }
   }))
+
    
   
   app.use(koaStaticServer({rootPath:'',rooDir:path.join(__dirname,`../${CONFIG.DIR.DIST}`)}))
