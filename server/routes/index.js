@@ -9,6 +9,15 @@ router.get('/', async (ctx, next) => {
      }
 })
 
+router.get('/error', async (ctx, next) => {
+  try{
+   
+   await ctx.render('error',{message:'行云流水111111111'})
+  }catch(e){
+     console.log(e)
+   next(e)
+  }
+})
 router.get('/string', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })
